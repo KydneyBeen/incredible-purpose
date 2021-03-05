@@ -1,0 +1,31 @@
+{
+  "name": "incredible-purpose",
+  "version": "1.0.0",
+  "description": "An incredible web app for an incredible purpose! Weather!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KydneyBeen/incredible-purpose.git"
+  },
+  "author": "Sydney Young",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KydneyBeen/incredible-purpose/issues"
+  },
+  "homepage": "https://github.com/KydneyBeen/incredible-purpose#readme",
+  "dependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "7.0.0",
+    "express": "^4.17.1",
+    "grunt-babel": "^8.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-less": "^2.0.0",
+    "less": "^3.10.3",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
