@@ -3,7 +3,7 @@
   "short_name": "The Forecast",
   "icons": [],
   "start_url": "http://localhost:8080",
-  "scope": "https://localhost",
+  "scope": "http://localhost:8080",
   "display": "standalone",
   "background_color": "#181818",
   "theme_color": "#181818"
