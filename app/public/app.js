@@ -37,6 +37,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
       loading: true
     };
     _this.weather = [];
+    _this.cities = [];
     _this.error = false;
     return _this;
   }
@@ -46,6 +47,11 @@ var Main = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      this.cities = {
+        key: 'vancouver',
+        name: 'Vancouver, BC'
+      };
+      this.loadCities();
       this.getWeather().then(function (weather) {
         _this2.weather = weather;
 
@@ -61,26 +67,97 @@ var Main = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "loadCities",
+    value: function loadCities() {
+      var _this3 = this;
+
+      var http = new XMLHttpRequest();
+      http.open('POST', '/cities');
+      http.addEventListener('loadend', function () {
+        _this3.cities = JSON.parse(http.response);
+      });
+      http.addEventListener('error', function (error) {
+        _this3.error = error;
+      });
+      http.send();
+    }
+  }, {
     key: "getWeather",
     value: function getWeather(city) {
       return new Promise(function (resolve, reject) {
         var weather = [];
         var http = new XMLHttpRequest();
         http.open('POST', '/seven/' + city);
-        http.onloadend(function (response) {
-          var data = JSON.parse(response);
-          weather = data.daily;
+        http.addEventListener('loadend', function () {
+          weather = JSON.parse(http.response).daily;
           resolve(weather);
         });
-        http.onerror(function (error) {
-          reject(error);
+        http.addEventListener('error', function () {
+          reject('error fetching weather');
+        });
+        http.send();
+      });
+    }
+  }, {
+    key: "updateWeather",
+    value: function updateWeather(city) {
+      var _this4 = this;
+
+      this.setState({
+        loading: true
+      }, function () {
+        _this4.getWeather(city).then(function (weather) {
+          _this4.weather = weather;
+
+          _this4.setState({
+            loading: false
+          });
+        })["catch"](function (error) {
+          _this4.error = error;
+
+          _this4.setState({
+            loading: false
+          });
         });
       });
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement("h1", null, "The Weather Forecast"), this.state.loading ? 'LOADING...' : this.weather);
+      var _this5 = this;
+
+      var weatherCards = function weatherCards() {
+        return _this5.weather.map(function (dayofweather) {
+          var day = new Date(dayofweather.dt * 1000);
+          return /*#__PURE__*/React.createElement("div", {
+            className: "weathercard"
+          }, /*#__PURE__*/React.createElement("p", {
+            className: "date"
+          }, day.toDateString()), /*#__PURE__*/React.createElement("p", {
+            className: "icon"
+          }, /*#__PURE__*/React.createElement("img", {
+            src: "http://openweathermap.org/img/wn/".concat(dayofweather.weather[0].icon, "@2x.png")
+          })), /*#__PURE__*/React.createElement("p", null, dayofweather.weather[0].description), /*#__PURE__*/React.createElement("p", null, dayofweather.temp.day, "\xB0C"));
+        });
+      };
+
+      var cityoptions = function cityoptions() {
+        return /*#__PURE__*/React.createElement("select", {
+          onChange: function onChange(e) {
+            _this5.updateWeather(e.target.value);
+          }
+        }, _this5.cities.map(function (city) {
+          return /*#__PURE__*/React.createElement("option", {
+            value: city.key
+          }, city.name.toUpperCase());
+        }));
+      };
+
+      return /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement("h1", null, "The Weather Forecast"), /*#__PURE__*/React.createElement("p", null, cityoptions()), /*#__PURE__*/React.createElement("div", {
+        className: "container"
+      }, this.state.loading ? /*#__PURE__*/React.createElement("p", {
+        className: "date"
+      }, "LOADING...") : weatherCards()));
     }
   }]);
 

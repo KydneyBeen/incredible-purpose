@@ -2,7 +2,7 @@ const apikey = require('../secret.js').owmkey
 const apilocation = 'https://api.openweathermap.org/data/2.5/onecall?'
 const https = require('https')
 
-
+// get data from Open Weather Map
 module.exports = (parameters, callback) => {
   let querystring = apilocation
   querystring += 'lat=' + parameters.lat

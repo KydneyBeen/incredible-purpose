@@ -1,0 +1,62 @@
+/* Colour scheme from https://www.colorcombos.com/color-schemes/7626/ColorCombo7626.html */
+body {
+  margin:0px;
+  background-color: #BEB9B5;
+  font-family: 'Poppins', sans-serif;
+  color: #74828F;
+  text-align: center;
+}
+
+h1 {
+  color: #C25B56;
+}
+
+.container {
+  text-align:left;
+  width:95%;
+  min-width: min-content;
+  display:inline-block;
+}
+
+.weathercard {
+  width: 95%;
+  max-width:300px;
+  display:inline-block;
+  text-align: center;
+  margin: 10px 5px;
+  padding: 10px;
+  border-radius:5px;
+  box-shadow: 2px 2px 2px #525564;
+  background-color: #FEF6EB;
+}
+
+.weathercard:first-of-type {
+  border: 2px solid #C25B56;
+} 
+
+.date {
+  color: #525564;
+  font-weight: bold;
+  text-align: center;
+}
+
+.icon {
+  display: inline-block;
+  width:100px;
+  height:100px;
+  text-align: center;
+  background-color: #96C0CE;
+  margin:10px;
+}
+
+select {
+  width: 300px;
+  border: 2px solid #525564;
+  color: #525564;
+  background-color: #FEF6EB;
+}
+
+a {
+  color: #C25B56;
+  text-transform: uppercase;
+}
